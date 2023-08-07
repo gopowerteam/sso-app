@@ -1,4 +1,4 @@
-import { FileType } from 'src/global/enums'
+import { FileType } from 'server/global/enums'
 
 export function minitypeToFileType(minitype: string): FileType {
   const imageRegexp = /image\/.*/

@@ -1,7 +1,7 @@
-import { NestFastifyApplication } from '@nestjs/platform-fastify'
+import { INestApplication } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
-export function swaggerBuilder(app: NestFastifyApplication) {
+export function swaggerBuilder(app: INestApplication) {
   const adapter = app.getHttpAdapter()
   const config = new DocumentBuilder()
     .setTitle('接口文档')
@@ -19,12 +19,10 @@ export function swaggerBuilder(app: NestFastifyApplication) {
     config,
   )
 
-  SwaggerModule.setup('docs', app, document, {
-    customCssUrl: '/swagger-ui.css',
-  })
+  SwaggerModule.setup('/docs', app, document)
 
   // 设置OPENAPI接口地址
-  adapter.get('/admin/api-docs', (req, res) => {
+  adapter.get('/api-docs', (req, res) => {
     res.send(JSON.stringify(document))
   })
 }

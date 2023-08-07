@@ -6,7 +6,7 @@ import {
   EntityWithEnable,
   EntityWithObjectID,
   EntityWithTime,
-} from 'src/core/database/entity'
+} from 'server/core/database/entity'
 
 @Entity('app')
 export class App extends pipe(

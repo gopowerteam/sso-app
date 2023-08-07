@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { RequestContext } from 'src/middlewaves/request-context.middlewave'
+import { RequestContext } from 'server/middlewaves/request-context.middlewave'
 import { BeforeInsert, BeforeSoftRemove, BeforeUpdate, Column } from 'typeorm'
 import { Constructor } from '.'
 

@@ -1,5 +1,5 @@
 import { ConfigModule } from '@nestjs/config'
-import { DatabaseConfig } from 'src/config/database.config'
+import { DatabaseConfig } from 'server/config/database.config'
 import { AppConfig } from './app.config'
 
 export function forConfigModule() {

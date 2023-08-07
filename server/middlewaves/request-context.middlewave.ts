@@ -2,11 +2,10 @@ import { AsyncLocalStorage } from 'node:async_hooks'
 import { Injectable } from '@nestjs/common'
 import { Response } from 'express'
 import { JwtService } from '@nestjs/jwt'
-import type { FastifyRequest } from 'fastify'
-import { AppOrigin } from 'src/global/enums'
+import { AppOrigin } from 'server/global/enums'
 
 export function RequestContextMiddleware(
-  req: FastifyRequest,
+  req: Request,
   res: Response,
   next: () => void,
 ) {
@@ -15,7 +14,7 @@ export function RequestContextMiddleware(
 
 @Injectable()
 export class RequestContext {
-  private req: FastifyRequest
+  private req: any
   private res: Response
 
   static cls = new AsyncLocalStorage<RequestContext>()
@@ -26,7 +25,7 @@ export class RequestContext {
 
   private get payload() {
     const jwtService = new JwtService()
-    const request = RequestContext.currentContext.req as FastifyRequest
+    const request = RequestContext.currentContext.req as any
     const jwt = request.headers.authorization
 
     return jwtService.decode(jwt.replace('Bearer ', '')) as {
@@ -48,7 +47,7 @@ export class RequestContext {
     return this.req.headers.host
   }
 
-  public static create(req: FastifyRequest, res: Response) {
+  public static create(req: any, res: Response) {
     const context = new RequestContext()
     context.req = req
     context.res = res

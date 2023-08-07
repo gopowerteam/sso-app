@@ -1,5 +1,5 @@
 import { ObjectType, SelectQueryBuilder } from 'typeorm'
-import { toUnderscore } from 'src/utils'
+import { toUnderscore } from 'server/utils'
 import { OrderMode, PaginatorMode } from '../../database.enums'
 
 export interface IndexPagingQuery {
