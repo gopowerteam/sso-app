@@ -1,17 +1,4 @@
-import Page1 from './views/page1.vue'
+import { routes as autoRoutes } from 'vue-router/auto/routes' // 引入文件路由表
+import { setupLayouts } from 'virtual:meta-layouts'
 
-export const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Page1,
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('./views/page2.vue'),
-  },
-]
+export const routes = setupLayouts(autoRoutes)
