@@ -1,6 +1,6 @@
-import { Constructor } from '.'
 import { Column } from 'typeorm'
 import { ApiProperty } from '@nestjs/swagger'
+import { Constructor } from '.'
 
 /**
  * 基础实体类型

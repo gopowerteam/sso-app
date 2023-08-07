@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { DatabaseModule } from './core/database/database.module'
 import { forConfigModule } from './config'
+import { DatabaseModule } from './core/database/database.module'
 
 @Module({
   imports: [

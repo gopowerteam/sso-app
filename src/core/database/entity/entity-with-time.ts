@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import { Constructor } from '.'
 import { Type } from 'class-transformer'
+import { Constructor } from '.'
 
 /**
  * 基础实体类型

@@ -14,16 +14,16 @@ export class User extends pipe(
   EntityWithEnable,
   EntityWithTime,
 )(EntityClass) {
+  @ApiProperty({ description: '用户昵称' })
+  @Column({ nullable: true })
+  nickname?: string
+
   @ApiProperty({ description: '用户邮箱' })
   @Column({ nullable: true })
   email?: string
 
   @Column({ nullable: true })
   password?: string
-
-  @ApiProperty({ description: '用户昵称' })
-  @Column({ nullable: true })
-  nickname: string
 
   @ApiProperty({ description: 'OPENID' })
   @Column({ nullable: true })
@@ -36,8 +36,4 @@ export class User extends pipe(
   @ApiProperty({ description: '手机号码' })
   @Column({ nullable: true })
   mobile: string
-
-  @ApiProperty({ description: '用户头像' })
-  @Column({ nullable: true })
-  avatar: string
 }

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { BeforeInsert, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm'
-import { Constructor } from '.'
+import { BeforeInsert, PrimaryColumn } from 'typeorm'
 import { nanoid } from 'nanoid'
+import { Constructor } from '.'
 /**
  * 基础实体类型
  * 默认添加id字段

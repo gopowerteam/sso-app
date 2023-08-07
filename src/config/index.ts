@@ -1,4 +1,5 @@
 import { ConfigModule } from '@nestjs/config'
+import { DatabaseConfig } from 'src/config/database.config'
 import { AppConfig } from './app.config'
 
 export function forConfigModule() {
@@ -9,6 +10,7 @@ export function forConfigModule() {
     envFilePath: [`.env.${environment}.local`, `.env.${environment}`],
     load: [
       AppConfig,
+      DatabaseConfig,
     ],
   })
 }
