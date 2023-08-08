@@ -7,8 +7,6 @@ import { Administrator } from 'server/entities/administrator.entity'
 import { User } from 'server/entities/user.entity'
 import { Repository } from 'typeorm'
 import { JwtService } from '@nestjs/jwt'
-import { CACHE_MANAGER } from '@nestjs/cache-manager'
-import { Cache } from 'cache-manager'
 import { TokenOrigin } from '../auth.enum'
 
 @Injectable()
@@ -16,8 +14,6 @@ export class AuthService {
   constructor(
     @Inject(AuthConfig.KEY)
     private readonly authConfig: ConfigType<typeof AuthConfig>,
-    @Inject(CACHE_MANAGER)
-    private readonly cacheManager: Cache,
     @InjectRepository(Administrator)
     private readonly administratorRepository: Repository<Administrator>,
     @InjectRepository(User)

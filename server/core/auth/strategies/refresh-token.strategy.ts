@@ -8,8 +8,6 @@ import { ConfigType } from '@nestjs/config'
 import { AuthConfig } from 'server/config/auth.config'
 import { Administrator } from 'server/entities/administrator.entity'
 import { User } from 'server/entities/user.entity'
-import { CACHE_MANAGER } from '@nestjs/cache-manager'
-import type { Cache } from 'cache-manager'
 import { AuthService } from '../services/auth.service'
 import { TokenOrigin } from '../auth.enum'
 
@@ -26,8 +24,6 @@ export class RefreshTokenStrategy extends PassportStrategy(
 ) {
   constructor(
     private readonly authService: AuthService,
-    @Inject(CACHE_MANAGER)
-    private readonly cacheManager: Cache,
     @Inject(AuthConfig.KEY)
     private readonly authConfig: ConfigType<typeof AuthConfig>,
   ) {

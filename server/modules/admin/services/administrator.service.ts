@@ -5,7 +5,7 @@ import { PaginatorMode } from 'server/core/database/database.enums'
 import { QueryInputParam } from 'server/core/database/database.interfaces'
 import { buildPaginator } from 'server/core/database/query/paginator'
 import { Administrator } from 'server/entities/administrator.entity'
-import { Repository } from 'typeorm'
+import { FindOptionsWhere, Repository } from 'typeorm'
 
 @Injectable()
 export class AdministratorService {
@@ -68,8 +68,8 @@ export class AdministratorService {
    * @param id
    * @returns
    */
-  findOne(id: string) {
-    return this.administratorRepository.findOneBy({ id })
+  findOne(where: FindOptionsWhere<Administrator>) {
+    return this.administratorRepository.findOneBy(where)
   }
 
   /**
