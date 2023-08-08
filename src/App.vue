@@ -1,20 +1,5 @@
 <template>
-  <div>
-    <header>
-      <div class="wrapper">
-        <nav>
-          <RouterLink to="/">
-            Home22
-          </RouterLink>
-          <RouterLink to="/about">
-            About1
-          </RouterLink>
-        </nav>
-      </div>
-    </header>
-
-    <RouterView />
-  </div>
+  <RouterView />
 </template>
 
 <style scoped>
@@ -83,7 +68,7 @@ nav a:first-of-type {
 
 <script setup lang="ts">
 import { defineComponent } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <script lang="ts">
