@@ -1,3 +1,6 @@
+export const ROLES_KEY = '__ROLES_KEY__'
+export const IS_PUBLIC_KEY = '__IS_PUBLIC_KEY__'
+
 export const CACHE_OPENAI_KEYS = 'OPENAI_KEYS'
 export const CACHE_BALANCE = 'BALANCE'
 export const CACHE_WXPAY = 'WXPAY'
