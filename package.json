@@ -23,7 +23,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "commit": "git-cz",
     "precommit": "chmod +x .husky/*",
-    "update:request": "npx request-generate"
+    "update:request": "npx request-generate",
+    "git:clean-branch":"git branch | grep -v \"master\" | xargs git branch -D"
   },
   "dependencies": {
     "@gopowerteam/request": "^0.1.16",
