@@ -1,6 +1,7 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common'
 import { nanoid } from 'nanoid'
 import { ModuleRef } from '@nestjs/core'
+import chalk from 'chalk'
 import { AdministratorService } from '../services/administrator.service'
 
 @Injectable()
@@ -14,13 +15,12 @@ export class LaunchService implements OnModuleInit {
     const administratorService = this.moduleRef.get(AdministratorService)
 
     if (!await administratorService.isExist()) {
+      const username = 'admin'
       const password = nanoid(12)
-      administratorService.create('admin', password).then(() => {
-        this.logger.log(`
-            administrator is inited:
-            username: admin
-            password: ${password}
-        `)
+      administratorService.create(username, password).then(() => {
+        Logger.log(chalk.bold.green('Adminstrator Create Success'))
+        Logger.log(`${chalk.green('username:')} ${chalk.blue.bold(username)}`)
+        Logger.log(`${chalk.green('password:')} ${chalk.blue.bold(password)}`)
       })
     }
   }
