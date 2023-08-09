@@ -1,5 +1,9 @@
 <template>
-  <RouterView />
+  <NMessageProvider>
+    <InjectProvider>
+      <RouterView />
+    </InjectProvider>
+  </NMessageProvider>
 </template>
 
 <style scoped>
@@ -66,13 +70,16 @@ nav a:first-of-type {
 }
 </style>
 
-<script setup lang="ts">
-import { defineComponent } from 'vue'
-import { RouterView } from 'vue-router'
-</script>
+<script setup lang="tsx">
+import { NMessageProvider, useMessage } from 'naive-ui'
 
-<script lang="ts">
-defineComponent({
-  inheritAttrs: true,
+const InjectProvider = defineComponent({
+  setup() {
+    return useSlots()?.default
+  },
+  mounted() {
+    globalThis.$message = useMessage()
+    this.$viewport.reset()
+  },
 })
 </script>

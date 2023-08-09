@@ -2,8 +2,9 @@ import type { PluginOption } from 'vite'
 import unocss from './unocss'
 import autoImport from './unplugin-auto-import'
 import components from './unplugin-vue-components'
-import routes from './vue-router'
+import router from './unplugin-vue-router'
 import layouts from './vite-plugin-vue-layouts'
+import request from './request'
 
 /**
  * DefineVitePlugins
@@ -16,10 +17,11 @@ export function defineVitePlugins(
   return {
     plugins: [
       autoImport,
-      routes,
+      router,
       layouts,
       components,
       unocss,
+      request,
       ...plugins,
     ],
   }

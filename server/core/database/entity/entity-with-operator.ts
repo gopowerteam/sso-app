@@ -12,14 +12,14 @@ import { Constructor } from '.'
 export function EntityWithOperator<TBase extends Constructor>(Base: TBase) {
   abstract class AbstractBase extends Base {
     @ApiProperty({ description: '操作人', type: 'string' })
-    @Column()
-    public operator: string
+    @Column({ nullable: true })
+    public operator?: string
 
     @BeforeInsert()
     @BeforeUpdate()
     @BeforeSoftRemove()
     setOperator() {
-      this.operator = RequestContext.currentContext.user
+      this.operator = RequestContext.currentContext?.user
     }
   }
   return AbstractBase

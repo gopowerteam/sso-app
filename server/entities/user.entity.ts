@@ -4,13 +4,13 @@ import { ApiProperty } from '@nestjs/swagger'
 import {
   EntityClass,
   EntityWithEnable,
-  EntityWithObjectID,
   EntityWithTime,
+  EntityWithUUID,
 } from 'server/core/database/entity'
 
 @Entity('user')
 export class User extends pipe(
-  EntityWithObjectID,
+  EntityWithUUID,
   EntityWithEnable,
   EntityWithTime,
 )(EntityClass) {

@@ -28,7 +28,6 @@ export default unocss({
       xl: '1280px',
       // custom
       mobile: '320px',
-      tablet: '768px',
       desktop: '1024px',
     },
   },

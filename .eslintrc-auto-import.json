@@ -291,6 +291,23 @@
     "watchThrottled": true,
     "watchTriggerable": true,
     "watchWithFilter": true,
-    "whenever": true
+    "whenever": true,
+    "useLink": true,
+    "acceptHMRUpdate": true,
+    "createPinia": true,
+    "defineStore": true,
+    "getActivePinia": true,
+    "mapActions": true,
+    "mapGetters": true,
+    "mapState": true,
+    "mapStores": true,
+    "mapWritableState": true,
+    "setActivePinia": true,
+    "setMapStoreSuffix": true,
+    "storeToRefs": true,
+    "appStore": true,
+    "layoutStore": true,
+    "useStore": true,
+    "userStore": true
   }
 }

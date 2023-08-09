@@ -4,13 +4,13 @@ import { ApiProperty } from '@nestjs/swagger'
 import {
   EntityClass,
   EntityWithEnable,
-  EntityWithObjectID,
   EntityWithTime,
+  EntityWithUUID,
 } from 'server/core/database/entity'
 
 @Entity('app')
 export class App extends pipe(
-  EntityWithObjectID,
+  EntityWithUUID,
   EntityWithEnable,
   EntityWithTime,
 )(EntityClass) {
@@ -18,6 +18,17 @@ export class App extends pipe(
   @Column()
   name: string
 
+  @ApiProperty({ description: '应用描述' })
+  @Column({ nullable: true })
+  description?: string
+
+  @ApiProperty({ description: '应用域名' })
   @Column()
-  domain?: string
+  domain: string
+
+  @Column()
+  wechatLogin: boolean
+
+  @Column()
+  password: boolean
 }

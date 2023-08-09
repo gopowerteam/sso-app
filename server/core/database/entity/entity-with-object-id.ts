@@ -1,4 +1,4 @@
-import { ObjectIdColumn } from 'typeorm'
+import { ObjectId, ObjectIdColumn } from 'typeorm'
 import { ApiProperty } from '@nestjs/swagger'
 import { Constructor } from '.'
 /**
@@ -9,9 +9,9 @@ import { Constructor } from '.'
  */
 export function EntityWithObjectID<TBase extends Constructor>(Base: TBase) {
   abstract class AbstractBase extends Base {
-    @ApiProperty({ description: 'ID', type: 'number' })
+    @ApiProperty({ description: 'ID' })
     @ObjectIdColumn()
-    id: number
+    id: ObjectId
   }
   return AbstractBase
 }
