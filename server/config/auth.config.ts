@@ -6,7 +6,7 @@ import { registerAs } from '@nestjs/config'
 export const AuthConfig = registerAs('auth', () => ({
   saltRounds: process.env.AUTH_SALT_ROUNDS,
   accessTokenSecret: process.env.AUTH_ACCESS_TOKEN_SECRET,
-  accessTokenExpiresIn: Number(process.env.AUTH_ACCESS_TOKEN_EXPIRES_IN),
+  accessTokenExpiresIn: process.env.AUTH_ACCESS_TOKEN_EXPIRES_IN,
   refreshTokenSecret: process.env.AUTH_REFRESH_TOKEN_SECRET,
-  refreshTokenExpiresIn: Number(process.env.AUTH_REFRESH_TOKEN_EXPIRES_IN),
+  refreshTokenExpiresIn: process.env.AUTH_REFRESH_TOKEN_EXPIRES_IN,
 }))

@@ -4,6 +4,7 @@ import autoImport from './unplugin-auto-import'
 import components from './unplugin-vue-components'
 import router from './unplugin-vue-router'
 import layouts from './vite-plugin-vue-layouts'
+import request from './request'
 
 /**
  * DefineVitePlugins
@@ -20,6 +21,7 @@ export function defineVitePlugins(
       layouts,
       components,
       unocss,
+      request,
       ...plugins,
     ],
   }

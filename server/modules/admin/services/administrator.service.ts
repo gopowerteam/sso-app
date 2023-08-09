@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { AuthService } from 'server/core/auth/services/auth.service'
+import { AuthService } from 'server/core/auth/auth.service'
 import { PaginatorMode } from 'server/core/database/database.enums'
 import { QueryInputParam } from 'server/core/database/database.interfaces'
 import { buildPaginator } from 'server/core/database/query/paginator'

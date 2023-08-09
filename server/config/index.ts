@@ -2,6 +2,7 @@ import { ConfigModule } from '@nestjs/config'
 import { DatabaseConfig } from 'server/config/database.config'
 import { AppConfig } from './app.config'
 import { AuthConfig } from './auth.config'
+import { RedisConfig } from './redis.config'
 
 export function forConfigModule() {
   const environment = process.env.NODE_ENV || 'development'
@@ -13,6 +14,7 @@ export function forConfigModule() {
       AppConfig,
       AuthConfig,
       DatabaseConfig,
+      RedisConfig,
     ],
   })
 }

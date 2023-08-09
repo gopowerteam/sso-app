@@ -5,12 +5,18 @@ export default autoImport({
   imports: [
     'vue',
     'vue/macros',
+    'pinia',
     '@vueuse/head',
     '@vueuse/core',
     VueRouterAutoImports,
+    {
+      '@/store':[
+        'useStore'
+      ]
+    }
   ],
   dts: 'src/types/auto-imports.d.ts',
-  dirs: [],
+  dirs: [ ],
   vueTemplate: true,
   eslintrc: {
     enabled: true,

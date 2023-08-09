@@ -7,13 +7,21 @@ import { Administrator } from 'server/entities/administrator.entity'
 import { User } from 'server/entities/user.entity'
 import { Repository } from 'typeorm'
 import { JwtService } from '@nestjs/jwt'
-import { TokenOrigin } from '../auth.enum'
+import { TokenResponse as AdminTokenResponse } from 'server/modules/admin/responses/auth.response'
+import dayjs from 'dayjs'
+import { CACHE_ADMIN_USER_TOKEN } from 'server/global/consants'
+import ms from 'ms'
+import { CACHE_MANAGER } from '@nestjs/cache-manager'
+import { Cache } from 'cache-manager'
+import { TokenOrigin } from './auth.enum'
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject(AuthConfig.KEY)
     private readonly authConfig: ConfigType<typeof AuthConfig>,
+    @Inject(CACHE_MANAGER)
+    private readonly cacheManager: Cache,
     @InjectRepository(Administrator)
     private readonly administratorRepository: Repository<Administrator>,
     @InjectRepository(User)
@@ -58,6 +66,13 @@ export class AuthService {
     })
   }
 
+  private getRefreshTokenExpiresIn(refreshToken?: string) {
+    if (refreshToken)
+      this.jwtService.decode(refreshToken)
+    else
+      return this.authConfig.refreshTokenExpiresIn
+  }
+
   /**
    * 管理员签名
    * @param admin
@@ -65,12 +80,14 @@ export class AuthService {
    */
   async adminUserSign(
     administrator: Administrator,
-    refreshTokenSign = false,
+    reRefreshToken?: string,
   ) {
     const payload = {
       id: administrator.id,
       origin: TokenOrigin.Admin,
     }
+
+    const refreshTokenExpiresIn = this.getRefreshTokenExpiresIn(reRefreshToken)
 
     // 获取AccessToken
     const accessToken = this.jwtService.sign(payload, {
@@ -78,20 +95,22 @@ export class AuthService {
       expiresIn: this.authConfig.accessTokenExpiresIn,
     })
 
-    // 获取AccessToken
     const refreshToken = this.jwtService.sign(payload, {
       secret: this.authConfig.refreshTokenSecret,
-      expiresIn: this.authConfig.refreshTokenExpiresIn,
+      expiresIn: refreshTokenExpiresIn,
     })
 
     // 返回认证信息
-    // const token: TokenResponse = {
-    //   access_token: accessToken,
-    //   refresh_token: accessToken,
-    //   expires_in: this.authConfig.accessTokenExpiresIn,
-    //   token_origin: TokenOrigin.Admin,
-    // }
+    const token: AdminTokenResponse = {
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      expires_in: dayjs().add(ms(this.authConfig.accessTokenExpiresIn), 'milliseconds').millisecond(),
+      token_origin: TokenOrigin.Admin,
+    }
 
-    // return token
+    // 缓存AccessToken
+    await this.cacheManager.set(`${CACHE_ADMIN_USER_TOKEN}:${refreshToken}`, administrator.id, ms(refreshTokenExpiresIn))
+
+    return token
   }
 }

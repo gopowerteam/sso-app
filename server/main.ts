@@ -3,7 +3,7 @@ import { Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { AppModule } from './app.module'
 import { swaggerBuilder } from './swagger'
-import { LoggerService } from './core/logger/services/logger.service'
+import { LoggerService } from './core/logger/logger.service'
 
 async function bootstrap() {
   const app = await NestFactory.create(
