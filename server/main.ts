@@ -32,9 +32,10 @@ async function bootstrap() {
     AppModule,
   )
 
+  app.setGlobalPrefix('api')
+
   swaggerBuilder(app)
 
-  app.setGlobalPrefix('api')
   app.useLogger(app.get(LoggerService))
 
   const config = app.get(ConfigService)

@@ -5,6 +5,7 @@ import {
 } from '@gopowerteam/request'
 import { AxiosAdapter } from '@gopowerteam/request/adapters'
 import type { Router } from 'vue-router'
+import { TokenService } from '../http/token.service'
 import { useStore } from '@/store'
 // import { useLogger } from '@/shared/hooks'
 
@@ -85,6 +86,8 @@ export default function (router: Router) {
       error: new ErrorInterceptors(),
       exception: new ExceptionInterceptors(router),
     },
-    plugins: [],
+    plugins: [
+      new TokenService(),
+    ],
   })
 }

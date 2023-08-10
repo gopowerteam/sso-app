@@ -8,7 +8,6 @@ import { User } from 'server/entities/user.entity'
 import { Repository } from 'typeorm'
 import { JwtService } from '@nestjs/jwt'
 import { TokenResponse as AdminTokenResponse } from 'server/modules/admin/responses/auth.response'
-import dayjs from 'dayjs'
 import { CACHE_ADMIN_USER_TOKEN } from 'server/global/consants'
 import ms from 'ms'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
@@ -66,11 +65,12 @@ export class AuthService {
     })
   }
 
-  private getRefreshTokenExpiresIn(refreshToken?: string) {
-    if (refreshToken)
-      this.jwtService.decode(refreshToken)
-    else
-      return this.authConfig.refreshTokenExpiresIn
+  private getRefreshTokenExpiresInSeconds(refreshToken?: string) {
+    if (refreshToken) {
+      const { exp } = this.jwtService.decode(refreshToken) as { exp: number }
+      return exp - Math.floor(Date.now() / 1000)
+    }
+    else { return ms(this.authConfig.refreshTokenExpiresIn) / 1000 }
   }
 
   /**
@@ -87,7 +87,7 @@ export class AuthService {
       origin: TokenOrigin.Admin,
     }
 
-    const refreshTokenExpiresIn = this.getRefreshTokenExpiresIn(reRefreshToken)
+    const refreshTokenExpiresInSeconds = this.getRefreshTokenExpiresInSeconds(reRefreshToken)
 
     // 获取AccessToken
     const accessToken = this.jwtService.sign(payload, {
@@ -97,19 +97,24 @@ export class AuthService {
 
     const refreshToken = this.jwtService.sign(payload, {
       secret: this.authConfig.refreshTokenSecret,
-      expiresIn: refreshTokenExpiresIn,
+      expiresIn: refreshTokenExpiresInSeconds,
     })
 
     // 返回认证信息
     const token: AdminTokenResponse = {
       access_token: accessToken,
       refresh_token: refreshToken,
-      expires_in: dayjs().add(ms(this.authConfig.accessTokenExpiresIn), 'milliseconds').millisecond(),
+      expires_in: Date.now() + ms(this.authConfig.accessTokenExpiresIn),
       token_origin: TokenOrigin.Admin,
     }
 
     // 缓存AccessToken
-    await this.cacheManager.set(`${CACHE_ADMIN_USER_TOKEN}:${refreshToken}`, administrator.id, ms(refreshTokenExpiresIn))
+    await this.cacheManager.set(
+        `${CACHE_ADMIN_USER_TOKEN}:${refreshToken}`,
+        administrator.id,
+        {
+          ttl: refreshTokenExpiresInSeconds,
+        })
 
     return token
   }

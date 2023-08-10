@@ -20,7 +20,7 @@
             size="small"
           >
             <NFormItem prop="username">
-              <NInput v-model="loginModel.username" placeholder="请输入用户名" size="large">
+              <NInput v-model:value="loginModel.username" placeholder="请输入用户名" size="large">
                 <template #prefix>
                   用户名
                 </template>
@@ -28,7 +28,7 @@
             </NFormItem>
             <NFormItem prop="password">
               <NInput
-                v-model="loginModel.password"
+                v-model:value="loginModel.password"
                 placeholder="请输入密码"
                 show-password-on="mousedown"
                 size="large"
@@ -122,10 +122,9 @@
 </style>
 
 <script setup lang="ts">
-import { type FormInst, type FormItemRule, useMessage } from 'naive-ui'
+import { type FormInst, type FormItemRule } from 'naive-ui'
 import { useRequest } from 'virtual:request'
 
-const message = useMessage()
 const authService = useRequest(({ AdminService }) => AdminService.AuthService)
 const formRef = $ref<FormInst>()
 const store = useStore()
@@ -171,11 +170,15 @@ function onSubmit() {
         refreshToken: refresh_token,
         expiresIn: expires_in,
       })
-      store.admin.user.updateUser({
-        roles: ['ADMIN'],
-      })
-      location.replace('/admin')
+
+      location.replace('/admin/')
     })
   })
 }
+
+onBeforeMount(() => {
+  const store = useStore()
+  if (store.admin.user.isLogin)
+    location.replace('/admin/')
+})
 </script>

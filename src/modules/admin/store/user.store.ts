@@ -9,7 +9,9 @@ export interface UserState {
 
 function createUserState(): UserState {
   return {
-
+    accessToken: undefined,
+    refreshToken: undefined,
+    expiresIn: undefined,
   }
 }
 

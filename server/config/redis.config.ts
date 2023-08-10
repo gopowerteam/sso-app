@@ -5,5 +5,5 @@ export const RedisConfig = registerAs('redis', () => ({
   port: process.env.REDIS_PORT,
   password: process.env.REDIS_PASSWORD,
   db: process.env.REDIS_DB,
-  ttl: 60 * 60 * 24 * 1000,
+  ttl: 60 * 60 * 24,
 }))

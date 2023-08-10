@@ -62,6 +62,7 @@ export default function launch(router: Router) {
       switch (true) {
         case ex instanceof RedirectError:
           location.replace((ex as RedirectError).redirect)
+          next(false)
           break
         default:
           next('/admin/500')
