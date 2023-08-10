@@ -32,6 +32,9 @@ export default defineStore('user', {
     updateUser(value: any) {
       this.current = value
     },
+    cleanAccessToken() {
+      this.accessToken = undefined
+    },
     logout() {
       this.accessToken = undefined
       this.refreshToken = undefined
@@ -40,6 +43,10 @@ export default defineStore('user', {
     },
   },
   persist: {
-    paths: ['token'],
+    paths: [
+      'accessToken',
+      'refreshToken',
+      'expiresIn',
+    ],
   },
 })

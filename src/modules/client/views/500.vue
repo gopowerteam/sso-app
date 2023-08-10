@@ -1,5 +1,7 @@
 <template>
-  <div>admin</div>
+  <div>
+    500
+  </div>
 </template>
 
 <style scoped>
@@ -9,8 +11,3 @@
 <script setup lang="ts">
 
 </script>
-
-<route lang="yaml">
-meta:
-  requireAuth: true
-</route>
