@@ -4,6 +4,7 @@ import {
   Injectable,
 } from '@nestjs/common'
 import { ConfigType } from '@nestjs/config'
+import * as store from 'cache-manager-redis-store'
 import { RedisConfig } from 'server/config/redis.config'
 
 @Injectable()
@@ -17,6 +18,7 @@ export class RedisOptions implements CacheOptionsFactory {
     const config = this.redisConfig
 
     return {
+      store,
       ...config,
     }
   }

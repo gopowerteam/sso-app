@@ -43,7 +43,7 @@ export class AuthController {
   @ApiOkResponse({ type: TokenResponse })
   @UseGuards(RefreshTokenGuard)
   token(@Headers('Authorization') authorization, @RequestUser() administrator: Administrator) {
-    const [token] = authorization.match(/(?<=\Bearer\s)(.*)/)
+    const [token]: [string] = authorization.match(/(?<=\Bearer\s)(.*)/)
     return this.authService.adminUserSign(administrator, token)
   }
 

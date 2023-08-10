@@ -71,8 +71,8 @@ export class RefreshTokenStrategy extends PassportStrategy(
     }
     else {
       // LOG:查看过期原因
-      Logger.error('登录过期:', payload, {
-        userid: user.id,
+      Logger.error('登录过期:', {
+        ...payload,
         token,
       })
 

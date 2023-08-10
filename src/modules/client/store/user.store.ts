@@ -1,13 +1,15 @@
 import { UserRole } from '@/config/enum.config'
 
 export interface UserState {
-  token: string
+  accessToken?: string
+  refreshToken?: string
+  expiresIn?: number
   current?: any
 }
 
 function createUserState(): UserState {
   return {
-    token: '',
+
   }
 }
 
@@ -15,25 +17,33 @@ export default defineStore('user', {
   state: createUserState,
   getters: {
     isLogin(state) {
-      return state.current && state.token
+      return state.current && state.accessToken
     },
     roles(): UserRole[] {
       return [UserRole.Admin]
     },
   },
   actions: {
-    updateToken(value: string) {
-      this.token = value
+    updateToken({ accessToken, refreshToken, expiresIn }: { accessToken: string; refreshToken: string; expiresIn: number }) {
+      this.accessToken = accessToken
+      this.refreshToken = refreshToken
+      this.expiresIn = expiresIn
     },
     updateUser(value: any) {
       this.current = value
     },
     logout() {
-      this.token = ''
+      this.accessToken = undefined
+      this.refreshToken = undefined
+      this.expiresIn = undefined
       this.current = undefined
     },
   },
   persist: {
-    paths: ['token'],
+    paths: [
+      'accessToken',
+      'refreshToken',
+      'expiresIn',
+    ],
   },
 })

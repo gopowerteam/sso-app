@@ -28,5 +28,6 @@ export default createSSR(App, { routes, styleCollector }, ({ app, router }: { ap
     },
   })
 
-  bootstrap(app, router)
+  if (!import.meta.env.SSR)
+    bootstrap(app, router)
 })
