@@ -1,7 +1,7 @@
 <template>
-  <NButton type="primary">
+  <ElButton type="primary">
     1231235
-  </NButton>
+  </ElButton>
   <div>desktop:{{ $viewport.desktop }}</div>
   <div>mobile:{{ $viewport.mobile }}</div>
   <div v-if="$viewport.desktop">
@@ -24,3 +24,7 @@
 <script setup lang="ts">
 const a = ref(true)
 </script>
+
+<route lang="yaml">
+name: client:index
+</route>

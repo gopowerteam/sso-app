@@ -11,6 +11,8 @@
 </script>
 
 <route lang="yaml">
+name: admin:dashboard
 meta:
+  layout: admin
   requireAuth: true
 </route>

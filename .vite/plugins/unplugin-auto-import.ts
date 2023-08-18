@@ -1,14 +1,13 @@
 import autoImport from 'unplugin-auto-import/vite';
-import { VueRouterAutoImports } from 'unplugin-vue-router';
 
 export default autoImport({
   imports: [
     'vue',
+    'vue-router',
     'vue/macros',
     'pinia',
     '@vueuse/head',
     '@vueuse/core',
-    VueRouterAutoImports,
     {
       '@/store':[
         'useStore'

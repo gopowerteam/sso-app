@@ -1,18 +1,15 @@
-import VueRouter from 'unplugin-vue-router/vite';
+import Pages from 'vite-plugin-pages'
 
-export default VueRouter({
-  routesFolder: [
+export default Pages({
+  dirs: [
     {
-      src: 'src/modules/client/views',
-      path: '/',
+      dir: 'src/modules/client/views',
+      baseRoute: '/',
     },
     {
-      src: 'src/modules/admin/views',
-      path: 'admin/',
+      dir: 'src/modules/admin/views',
+      baseRoute: 'admin/',
     },
   ],
-  exclude: ['**/components/*.vue'],
-  extensions: ['.vue'],
-  dts: 'src/types/typed-router.d.ts',
   routeBlockLang: 'yaml',
 });

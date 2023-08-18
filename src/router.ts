@@ -1,11 +1,11 @@
-import { routes as autoRoutes } from 'vue-router/auto/routes' // 引入文件路由表
-import { setupLayouts } from 'virtual:meta-layouts'
-import type { RouteRecordRaw } from 'vue-router/auto'
+import routes from 'virtual:generated-pages'
+import { setupLayouts } from 'virtual:generated-layouts'
+import type { RouteRecordRaw } from 'vue-router'
 
-export const routes: RouteRecordRaw[] = [
+export default [
   {
     path: '/admin',
     redirect: '/admin/dashboard',
   },
-  ...setupLayouts(autoRoutes),
-]
+  ...setupLayouts(routes),
+] as RouteRecordRaw[]

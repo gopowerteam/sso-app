@@ -11,3 +11,7 @@
 <script setup lang="ts">
 
 </script>
+
+<route lang="yaml">
+name: admin:500
+</route>

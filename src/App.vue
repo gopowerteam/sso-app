@@ -1,9 +1,5 @@
 <template>
-  <NMessageProvider>
-    <InjectProvider>
-      <RouterView />
-    </InjectProvider>
-  </NMessageProvider>
+  <RouterView />
 </template>
 
 <style scoped>
@@ -70,15 +66,9 @@ nav a:first-of-type {
 }
 </style>
 
-<script setup lang="tsx">
-import { NMessageProvider, useMessage } from 'naive-ui'
-
-const InjectProvider = defineComponent({
-  setup() {
-    return useSlots()?.default
-  },
+<script lang="tsx">
+export default defineComponent({
   mounted() {
-    globalThis.$message = useMessage()
     this.$viewport.reset()
   },
 })

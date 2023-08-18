@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SSO</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+  <meta http-equiv="Content-Security-Policy"
+    content="script-src 'self' 'unsafe-inline'; object-src 'none'; style-src unpkg.com 'unsafe-inline'; child-src https:">
+
   <style>
-    .preload{
+    .preload {
       display: none;
     }
   </style>
 </head>
+
 <body class="preload">
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
@@ -22,5 +28,5 @@
     }
   </script>
 </body>
-</html>
 
+</html>

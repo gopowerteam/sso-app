@@ -8,48 +8,46 @@
           <div class="title text-2xl font-bold">
             现在立即登陆
           </div>
+          <div class="text-sm flex items-center space-x-1">
+            <span>没有帐号?</span>
+            <ElLink style="--el-link-font-size: 0.875rem;" type="primary">
+              注册一个
+            </ElLink>
+          </div>
         </div>
 
         <div class="login-form">
-          <NForm
-            ref="formRef"
-            label-placement="left"
-            label-width="auto"
-            :model="loginModel"
-            :rules="loginRules"
-            size="small"
-          >
-            <NFormItem prop="username">
-              <NInput v-model:value="loginModel.username" placeholder="请输入用户名" size="large">
-                <template #prefix>
+          <ElForm ref="loginFormRef" :model="formModel" :rules="formRules">
+            <ElFormItem prop="username">
+              <ElInput v-model="formModel.username" placeholder="请输入用户名" size="large">
+                <template #prepend>
                   用户名
                 </template>
-              </NInput>
-            </NFormItem>
-            <NFormItem prop="password">
-              <NInput
-                v-model:value="loginModel.password"
+              </ElInput>
+            </ElFormItem>
+            <ElFormItem prop="password">
+              <ElInput
+                v-model="formModel.password"
                 placeholder="请输入密码"
-                show-password-on="mousedown"
                 size="large"
                 type="password"
               >
-                <template #prefix>
+                <template #prepend>
                   密码
                 </template>
-              </NInput>
-            </NFormItem>
-            <NFormItem>
-              <NButton
-                block
+              </ElInput>
+            </ElFormItem>
+            <ElFormItem>
+              <ElButton
+                class="w-full"
                 size="large"
                 type="primary"
                 @click="onSubmit"
               >
                 登录
-              </NButton>
-            </NFormItem>
-          </NForm>
+              </ElButton>
+            </ElFormItem>
+          </ElForm>
         </div>
       </div>
     </div>
@@ -68,15 +66,12 @@
   border-radius: 10px;
 
 }
-.login-form :deep(.n-input-wrapper){
-  padding-left: 0;
-  .n-input__prefix {
-    color:var(--text-color-primary);
-    min-width: 5em;
-    font-size: 0.8rem;
-    font-weight: bolder;
-    justify-content: flex-end;
-  }
+.login-form :deep(.el-input-group__prepend){
+  background-color: var(--bg-color);
+  color:var(--text-color-primary);
+  min-width: 3em;
+  font-size: 0.8rem;
+  font-weight: bolder;
 }
 
 .background{
@@ -122,37 +117,42 @@
 </style>
 
 <script setup lang="ts">
-import { type FormInst, type FormItemRule } from 'naive-ui'
+import type { FormInstance, FormRules } from 'element-plus'
 import { useRequest } from 'virtual:request'
 
-const authService = useRequest(({ AdminService }) => AdminService.AuthService)
-const formRef = $ref<FormInst>()
 const store = useStore()
-const loginModel = $ref({
+const formRef = $ref<FormInstance>()
+const authService = useRequest(({ AdminService }) => AdminService.AuthService)
+
+const formModel = $ref({
   username: '',
   password: '',
 })
 
-const loginRules: Record<string, FormItemRule[]> = {
+const formRules: FormRules = {
   username: [
     {
       required: true,
       message: '请输入用户名',
+      trigger: 'blur',
     },
     {
       min: 4,
       max: 12,
       message: '用户名格式错误',
+      trigger: 'blur',
     }],
   password: [
     {
       required: true,
       message: '请输入密码',
+      trigger: 'blur',
     },
     {
       min: 6,
       max: 12,
       message: '密码格式错误',
+      trigger: 'blur',
     }],
 }
 
@@ -162,8 +162,8 @@ function onSubmit() {
       return
 
     authService.login({
-      username: loginModel.username,
-      password: loginModel.password,
+      username: formModel.username,
+      password: formModel.password,
     }).then(({ access_token, refresh_token, expires_in }) => {
       store.admin.user.updateToken({
         accessToken: access_token,
@@ -182,3 +182,7 @@ onBeforeMount(() => {
     location.replace('/admin/')
 })
 </script>
+
+<route lang="yaml">
+name: admin:login
+</route>
