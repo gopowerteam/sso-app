@@ -6,6 +6,6 @@ import httpSetup from './http.setup'
  * 系统基础功能配置
  * @param app
  */
-export default function (_app: App<Element>, router: Router) {
+export default function (app: App<Element>, router: Router) {
   httpSetup(router)
 }
