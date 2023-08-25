@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="absolute inset-0">
     <ElScrollbar
       class="absolute! inset-0"
       :view-style="{ minHeight: '100%', display: 'flex', flexDirection: 'column', backgroundColor: workspace.content.background }"
@@ -8,7 +8,7 @@
         <ContentHeader />
       </ElHeader>
       <ElMain class="mian-container flex-auto" :style="`--el-main-padding:0 ${workspace.content.padding}px;`">
-        <slot />
+        <RouterView />
       </ElMain>
       <ElFooter height="auto">
         <ContentFooter />

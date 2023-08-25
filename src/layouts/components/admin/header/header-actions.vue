@@ -8,7 +8,7 @@
     <div class="action-item">
       <ClientOnly>
         <ElDropdown @command="onCommand">
-          <div class="flex items-center space-x-2">
+          <div class="flex items-center space-x-2 outline-none">
             <ElAvatar size="small" />
             <div>user</div>
           </div>

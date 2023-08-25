@@ -10,7 +10,7 @@
       <Sider />
     </div>
     <div class="relative" style="grid-area: content;background-color: red;">
-      <RouterView />
+      <Content />
     </div>
   </main>
 </template>
@@ -34,6 +34,7 @@
 <script lang="ts" setup>
 import Header from './components/admin/header/index.vue'
 import Sider from './components/admin/sider/index.vue'
+import Content from './components/admin/content/index.vue'
 import { appConfig } from '@/config/app.config'
 
 const store = useStore()

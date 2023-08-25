@@ -17,7 +17,7 @@
         </div>
 
         <div class="login-form">
-          <ElForm ref="loginFormRef" :model="formModel" :rules="formRules">
+          <ElForm ref="formRef" :model="formModel" :rules="formRules">
             <ElFormItem prop="username">
               <ElInput v-model="formModel.username" placeholder="请输入用户名" size="large">
                 <template #prepend>
@@ -156,11 +156,10 @@ const formRules: FormRules = {
     }],
 }
 
-function onSubmit() {
-  formRef?.validate((error) => {
-    if (error)
-      return
+async function onSubmit() {
+  const valid = await formRef?.validate()
 
+  if (valid) {
     authService.login({
       username: formModel.username,
       password: formModel.password,
@@ -173,7 +172,7 @@ function onSubmit() {
 
       location.replace('/admin/')
     })
-  })
+  }
 }
 
 onBeforeMount(() => {
