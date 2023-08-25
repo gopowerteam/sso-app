@@ -9,6 +9,7 @@ import routes from './router'
 
 import '@unocss/reset/normalize.css'
 import 'uno.css'
+import '@/styles/index.scss'
 import viewport from './plugins/viewport.plugin'
 import { bootstrap } from './bootstrap'
 

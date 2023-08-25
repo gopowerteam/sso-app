@@ -5,6 +5,12 @@
   </section>
 </template>
 
+<style lang="scss" scoped>
+:deep(.el-scrollbar__bar.is-horizontal){
+  display: none;
+}
+</style>
+
 <script setup lang="ts">
 import SideMenu from './sider-menu.vue'
 import SideActions from './sider-actions.vue'

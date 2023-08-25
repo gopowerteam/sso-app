@@ -1,21 +1,18 @@
 <template>
-  <section>
-    <ElScrollbar class="absolute! inset-0" :style="{ backgroundColor: workspace.sider.background }">
-      <ElMenu
-        auto-open-selected
-        class="sider-menu"
-        :collapse="store.admin.layout.sider.collapsed"
-        collapse-transition
-        :default-active="route.path"
-        menu-trigger="click"
-        mode="vertical"
-        router
-        :unique-opened="$viewport.desktop"
-      >
-        <MenuItem v-for="menu in roots" :key="menu.key" :menu="menu" />
-      </ElMenu>
-    </ElScrollbar>
-  </section>
+  <ElScrollbar class="absolute! inset-0" :style="{ backgroundColor: workspace.sider.background }">
+    <ElMenu
+      class="sider-menu"
+      :collapse="store.admin.layout.sider.collapsed"
+      collapse-transition
+      :default-active="route.path"
+      menu-trigger="click"
+      mode="vertical"
+      router
+      :unique-opened="$viewport.desktop"
+    >
+      <MenuItem v-for="menu in roots" :key="menu.key" :menu="menu" />
+    </ElMenu>
+  </ElScrollbar>
 </template>
 
 <style scoped lang="scss">
@@ -65,7 +62,7 @@ const roots = $ref<RouteMenu[]>([])
  * 生成菜单
  */
 function generateMenus() {
-  const pages = router.getRoutes().filter(route => route.meta.menu).map((route, index) => ({
+  const pages = router.getRoutes().filter(route => route.path.startsWith('/admin/') && route.name).filter(route => route.meta.menu).map((route, index) => ({
     ...route.meta.menu,
     path: route.path,
     index: route.meta.menu?.index || (index + 100),

@@ -1,12 +1,16 @@
 <template>
   <main
-    class="admin-layout a1 a2 a3"
+    class="admin-layout"
     :class="{ desktop: $viewport.desktop, mobile: $viewport.mobile }"
   >
-    <div style="grid-area: header" class="relative">header</div>
-    <div style="grid-area: sider" class="relative">sider</div>
-    <div style="grid-area: content" class="relative">
-      <RouterView></RouterView>
+    <div class="relative" style="grid-area: header">
+      <Header />
+    </div>
+    <div class="relative" style="grid-area: sider">
+      <Sider />
+    </div>
+    <div class="relative" style="grid-area: content;background-color: red;">
+      <RouterView />
     </div>
   </main>
 </template>
@@ -19,21 +23,25 @@
   grid-template-areas:
     'header header'
     'sider content';
-  background-color: red;
   position: absolute;
   inset: 0;
+  transition-property: grid-template-columns;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 </style>
 
 <script lang="ts" setup>
-import { appConfig } from '@/config/app.config';
+import Header from './components/admin/header/index.vue'
+import Sider from './components/admin/sider/index.vue'
+import { appConfig } from '@/config/app.config'
 
-const store = useStore();
-const workspace = ref(appConfig.workspace);
+const store = useStore()
+const workspace = ref(appConfig.workspace)
 
 const siderWidth = computed(() =>
   store.admin.layout.sider.collapsed
     ? appConfig.workspace.sider.collapsedWidth
     : appConfig.workspace.sider.width,
-);
+)
 </script>
