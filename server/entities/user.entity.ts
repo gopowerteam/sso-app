@@ -18,6 +18,10 @@ export class User extends pipe(
   @Column({ nullable: true })
   nickname?: string
 
+  @ApiProperty({ description: '用户名' })
+  @Column({ nullable: true })
+  username?: string
+
   @ApiProperty({ description: '用户邮箱' })
   @Column({ nullable: true })
   email?: string

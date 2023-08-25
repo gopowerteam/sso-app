@@ -48,8 +48,10 @@ class ExceptionInterceptors implements ResponseInterceptor {
 
       // logger.error(errorMessage)
 
-      if (response.data?.toast === true)
-        globalThis.$message.error(errorMessage)
+      if (response.data?.toast === true) {
+        //
+      }
+      // globalThis.$message.error(errorMessage)
     }
 
     switch (response.status) {

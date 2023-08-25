@@ -15,7 +15,9 @@ export class SSRModule implements OnModuleInit {
 
     async function renderDevMode(app: express.Express) {
       const vite = await createSsrServer({
-        server: { middlewareMode: true },
+        server: {
+          middlewareMode: true,
+        },
         appType: 'custom',
         define: {
           __initialState__: { a: 2 },
@@ -59,9 +61,7 @@ export class SSRModule implements OnModuleInit {
       })
     }
 
-    if (process.env.NODE_ENV === 'production')
-      await renderProdMode(app)
-    else
-      await renderDevMode(app)
+    if (process.env.NODE_ENV === 'production') await renderProdMode(app)
+    else await renderDevMode(app)
   }
 }

@@ -1,4 +1,4 @@
-import { Column, Entity } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm'
 import { pipe } from 'ramda'
 import { ApiProperty } from '@nestjs/swagger'
 import {
@@ -7,6 +7,10 @@ import {
   EntityWithTime,
   EntityWithUUID,
 } from 'server/core/database/entity'
+import { AuthUsername } from './auth-username.entity'
+import { AuthEmail } from './auth-email.entity'
+import { AuthPhone } from './auth-phone.entity'
+import { AuthWxmp } from './auth-wxmp.entity'
 
 @Entity('app')
 export class App extends pipe(
@@ -26,9 +30,23 @@ export class App extends pipe(
   @Column()
   domain: string
 
-  @Column()
-  wechatLogin: boolean
+  @ApiProperty({ description: '用户名授权支持' })
+  @OneToOne(() => AuthUsername, { nullable: true })
+  @JoinColumn()
+  authUsername: AuthUsername
 
-  @Column()
-  password: boolean
+  @ApiProperty({ description: '邮箱授权支持' })
+  @OneToOne(() => AuthEmail, { nullable: true })
+  @JoinColumn()
+  authEmail: AuthEmail
+
+  @ApiProperty({ description: '手机授权支持' })
+  @OneToOne(() => AuthPhone, { nullable: true })
+  @JoinColumn()
+  authPhone: AuthPhone
+
+  @ApiProperty({ description: '微信公众号授权支持' })
+  @OneToOne(() => AuthWxmp, { nullable: true })
+  @JoinColumn()
+  authWxmp: AuthWxmp
 }

@@ -17,8 +17,8 @@ export function defineVitePlugins(
   return {
     plugins: [
       autoImport,
-      router,
       layouts,
+      router,
       components,
       unocss,
       request,

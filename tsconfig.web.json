@@ -8,6 +8,8 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["naive-ui/volar"]
+    "types": [
+      "element-plus/global.d.ts"
+    ]
   }
 }

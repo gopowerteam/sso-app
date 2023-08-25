@@ -1,6 +1,6 @@
-import layouts from 'vite-plugin-vue-meta-layouts';
+import layouts from 'vite-plugin-vue-layouts';
 
 
 export default layouts({
-  target: 'src/layouts',
+  layoutsDirs : 'src/layouts',
 })

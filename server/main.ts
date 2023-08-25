@@ -22,8 +22,8 @@ async function printInfo(port: number) {
   Logger.debug(` ${HLINE} `)
   Logger.debug(`${VLINE}${chalk.bold.green(alignWidth('Web Launched  🚀'))}${VLINE}`)
   Logger.debug(`${VLINE}${alignWidth('')}${VLINE} `)
-  Logger.debug(`${VLINE}${alignWidth(`[ Admin Web URL]: http://localhost:${port}`)}${VLINE}`)
-  Logger.debug(`${VLINE}${alignWidth(`[Client Web URL]: http://localhost:${port}/admin`)}${VLINE}`)
+  Logger.debug(`${VLINE}${alignWidth(`[ Admin Web URL]: http://localhost:${port}/admin`)}${VLINE}`)
+  Logger.debug(`${VLINE}${alignWidth(`[Client Web URL]: http://localhost:${port}/`)}${VLINE}`)
   Logger.debug(` ${HLINE} `)
 }
 

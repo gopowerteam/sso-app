@@ -11,3 +11,7 @@
 <script setup lang="ts">
 
 </script>
+
+<route lang="yaml">
+name: client:500
+</route>
