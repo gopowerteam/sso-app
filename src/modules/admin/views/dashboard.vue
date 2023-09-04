@@ -1,5 +1,6 @@
 <template>
-  <div>admin</div>
+  <div>admin1123555</div>
+  <div>{{ aaa }}1</div>
 </template>
 
 <style scoped>
@@ -7,7 +8,7 @@
 </style>
 
 <script setup lang="ts">
-
+const aaa =$ref("xxx")
 </script>
 
 <route lang="yaml">

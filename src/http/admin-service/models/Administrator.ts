@@ -1,3 +1,4 @@
+/* eslint-disable eslint-comments/no-unlimited-disable */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */

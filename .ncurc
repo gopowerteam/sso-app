@@ -1,0 +1,14 @@
+{
+  "upgrade": true,
+  "color":true,
+  "interactive": true,
+  "packageManager":"pnpm",
+  "format":"group",
+  "reject": [
+    "cache-manager",
+    "cache-manager-redis-store",
+    "chalk",
+    "nanoid",
+    "@types/node"
+  ]
+}
