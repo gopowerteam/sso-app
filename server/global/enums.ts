@@ -27,3 +27,14 @@ export enum FileType {
   Document = 'DOCUMENT',
   Other = 'OTHER',
 }
+
+export enum AccountType {
+  Username = 'USERNAME',
+  Mobile = 'MOBILE',
+  Email = 'EMAIL',
+}
+
+export enum AuthType {
+  Password = 'PASSWORD',
+  Wxmp = 'WXMP',
+}

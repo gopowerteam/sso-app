@@ -1,6 +1,6 @@
 <template>
   <div>
-    500
+    500 error
   </div>
 </template>
 

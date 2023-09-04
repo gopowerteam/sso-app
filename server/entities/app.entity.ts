@@ -7,9 +7,8 @@ import {
   EntityWithTime,
   EntityWithUUID,
 } from 'server/core/database/entity'
-import { AuthUsername } from './auth-username.entity'
-import { AuthEmail } from './auth-email.entity'
-import { AuthPhone } from './auth-phone.entity'
+import { AuthType } from 'server/global/enums'
+import { AuthPassword } from './auth-password.entity'
 import { AuthWxmp } from './auth-wxmp.entity'
 
 @Entity('app')
@@ -30,23 +29,17 @@ export class App extends pipe(
   @Column()
   domain: string
 
-  @ApiProperty({ description: '用户名授权支持' })
-  @OneToOne(() => AuthUsername, { nullable: true })
-  @JoinColumn()
-  authUsername: AuthUsername
+  @ApiProperty({ description: '授权类型', enum: AuthType })
+  @Column({ enum: AuthType })
+  authType: AuthType
 
-  @ApiProperty({ description: '邮箱授权支持' })
-  @OneToOne(() => AuthEmail, { nullable: true })
+  @ApiProperty({ description: '密码授权支持', type: () => AuthPassword })
+  @OneToOne(() => AuthPassword, { nullable: true, cascade: true })
   @JoinColumn()
-  authEmail: AuthEmail
+  authPassword?: AuthPassword
 
-  @ApiProperty({ description: '手机授权支持' })
-  @OneToOne(() => AuthPhone, { nullable: true })
+  @ApiProperty({ description: '微信公众号授权支持', type: () => AuthWxmp })
+  @OneToOne(() => AuthWxmp, { nullable: true, cascade: true })
   @JoinColumn()
-  authPhone: AuthPhone
-
-  @ApiProperty({ description: '微信公众号授权支持' })
-  @OneToOne(() => AuthWxmp, { nullable: true })
-  @JoinColumn()
-  authWxmp: AuthWxmp
+  authWxmp?: AuthWxmp
 }

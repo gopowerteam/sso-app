@@ -6,6 +6,8 @@ import svg from 'vite-svg-loader'
 import { defineVitePlugins } from './.vite/plugins'
 import { defineViteResolve } from './.vite/resolve'
 import { defineViteCSS } from './.vite/css'
+import ReactivityTransform from '@vue-macros/reactivity-transform/vite'
+
 
 export default defineConfig({
   ...defineViteResolve(),
@@ -29,9 +31,10 @@ export default defineConfig({
         keepIndexHtml: true,
       },
     }),
-    vue({ reactivityTransform: true }),
+    vue(),
     jsx(),
     svg(),
+    ReactivityTransform()
   ]),
   ssr: {
     external: ['reflect-metadata'],

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common'
 import { RouterModule } from '@nestjs/core'
 import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { forConfigModule } from './config'
 import { DatabaseModule } from './core/database/database.module'
 import { SSRModule } from './core/ssr/ssr.module'
@@ -34,6 +33,6 @@ import { RedisModule } from './core/redis/redis.module'
     ]),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

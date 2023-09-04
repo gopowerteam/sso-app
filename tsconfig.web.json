@@ -9,7 +9,8 @@
       "@/*": ["src/*"]
     },
     "types": [
-      "element-plus/global.d.ts"
+      "element-plus/global.d.ts",
+      "@vue-macros/reactivity-transform/macros-global"
     ]
   }
 }

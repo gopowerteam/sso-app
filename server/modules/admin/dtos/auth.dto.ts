@@ -10,3 +10,13 @@ export class LoginInput {
   @Length(6, 20)
   password: string
 }
+
+export class ChangePasswordInput {
+  @ApiProperty({ description: '旧密码' })
+  @Length(6, 20)
+  oldPassword: string
+
+  @ApiProperty({ description: '新密码' })
+  @Length(4, 20)
+  newPassword: string
+}

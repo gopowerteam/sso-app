@@ -6,9 +6,9 @@ import { Administrator } from 'server/entities/administrator.entity'
 import { omit } from 'ramda'
 import { RequestUser } from 'server/core/auth/decorators/request-user.decorator'
 import { RefreshTokenGuard } from 'server/core/auth/guards/refresh-token.guard'
-import { TokenResponse } from '../../responses/auth.response'
-import { LoginInput } from '../../dtos/auth.dto'
-import { AdministratorService } from '../../services/administrator.service'
+import { TokenResponse } from '../responses/auth.response'
+import { ChangePasswordInput, LoginInput } from '../dtos/auth.dto'
+import { AdministratorService } from '../services/administrator.service'
 
 @ApiTags('auth')
 @ApiSecurity('access-token')
@@ -52,5 +52,16 @@ export class AuthController {
   @ApiOkResponse({ type: Administrator })
   getCurrentUser(@RequestUser() administrator: Administrator) {
     return omit(['password'], administrator)
+  }
+
+  @Post('change-password')
+  @ApiOperation({ operationId: 'changePassword', summary: '更新密码' })
+  @ApiOkResponse()
+  async changePassword(@RequestUser() administrator: Administrator, @Body() { oldPassword, newPassword }: ChangePasswordInput) {
+    if (!this.authService.comparePassword(oldPassword, administrator.password))
+      throw new UnauthorizedException({ message: '原密码错误', toast: true })
+
+    administrator.password = await this.authService.hashPassword(newPassword)
+    return administrator.save()
   }
 }
